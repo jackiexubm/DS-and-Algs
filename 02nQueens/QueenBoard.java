@@ -19,10 +19,51 @@ public class QueenBoard{
 	return solveH(0);
     }
 
+    public String toStringDebug(){
+	String ret  = "";
+	for (int x = 0; x < board.length; x ++){
+	    for (int y = 0; y < board.length; y ++){
+		if (board[x][y] >= 0){
+		    ret = ret + " " + board[x][y] + " ";
+		}else{
+		    ret = ret + board[x][y] + " ";
+		}
+	    }
+	    ret += "\n";
+	}
+	return ret;
+    }    
+    
     /**
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
+	if (col == board.length - 1 ){
+	    printSolution();
+	    for(int i = 0; i < board.length; i++){
+		for (int i2 = 0; i2 < board.length; i2 ++){
+		    removeQueen(i2, col);
+		}                                                                                                                            
+		if(addQueen(i,col)){
+		    return true;
+		}
+	    }
+	    return false;
+	};
+	System.out.println(toStringDebug());
+	for (int i = 0; i < board.length; i++){
+	    for (int i2 = 0; i2 < board.length; i2 ++){
+		removeQueen(i2, col);
+	    }
+	    if(addQueen(i,col)){
+		solveH(col + 1);
+	    }
+	}
+	for (int i = 0; i < board.length; i ++){
+	    for (int i2 = 0; i2 < board.length; i2 ++){
+		board[i][i2] = 0;
+	    }
+	}
 	return false;
     }
     
@@ -32,8 +73,8 @@ public class QueenBoard{
 	   and all 1's are replaced with 'Q'
 	*/
 	String ret  = "";
-	for (int x = 0; x <size; x ++){
-	    for (int y = 0; y < size; y ++){
+	for (int x = 0; x < board.length; x ++){
+	    for (int y = 0; y < board.length; y ++){
 		if (board[x][y] > 0){
 		    ret =  ret + " Q ";
 		}else{
@@ -42,7 +83,7 @@ public class QueenBoard{
 	    }
 	    ret += "\n";
 	}
-	return ret;  
+	System.out.println(ret);  
     }
 
     /********Do Not Edit Below This Line**********************************/
@@ -63,6 +104,11 @@ public class QueenBoard{
 	    }
 	    offset++;
 	}
+	//	for (int i = 1; i < board.length; i ++){
+	//   if (row + i < board.length){
+	//	board[row + i][col] --;
+	//    }
+	//	}
 	return true;
     }
 
@@ -82,6 +128,11 @@ public class QueenBoard{
 	    }
 	    offset++;
 	}
+	//	for (int i = 1; i < board.length; i ++){
+	//  if (row + i < board.length){
+	//	board[row + i][col] ++;
+	//  }
+	//	}
 	return true;
     }
 

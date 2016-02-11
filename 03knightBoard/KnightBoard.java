@@ -12,7 +12,7 @@ public class KnightBoard{
     public boolean solveH(){
 	return false;
     }
-
+    
     public void printSolution(){
 	String ret  = "";
 	for (int x = 0; x < board.length; x ++){

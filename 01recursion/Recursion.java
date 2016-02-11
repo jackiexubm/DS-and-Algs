@@ -14,6 +14,9 @@ public class Recursion implements hw01{
 	if(original < 0){
 	    throw new IllegalArgumentException(); 
 	}
+	if(original ==0){
+	    return 0;
+	}
 	if((original - guess * guess)/original >= -.00000000000001 && (original - guess * guess)/original <= .00000000000001){
 	    return guess;
 	}
