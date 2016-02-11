@@ -1,0 +1,26 @@
+public class KnightBoard{
+    int[][] board;
+
+    public KnightBoard(int size){
+	board = new int[size][size];
+    }
+    
+    public boolean solve(){
+
+    }
+
+    public void printSolution(){
+	String ret  = "";
+	for (int x = 0; x < board.length; x ++){
+	    for (int y = 0; y < board.length; y ++){
+		if (board[x][y] >= 0){
+		    ret = ret + " " + board[x][y] + " ";
+		}else{
+		    ret = ret + board[x][y] + " ";
+		}
+	    }
+	    ret += "\n";
+	}
+	System.out.println(ret);
+    }    
+}
