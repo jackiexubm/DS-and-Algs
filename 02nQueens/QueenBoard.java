@@ -38,18 +38,53 @@ public class QueenBoard{
      *Helper method fr solve. 
      */
     private boolean solveH(int col){
+	if (col == board.length - 1){
+	    if(checkQueenRow(col) < 0){
+		if(addQueen(0,col)){
+		    return true;
+		}
+	    }else{
+		int i = 1;
+		while(!addQueen(i,col)){
+		    i = i + 1;
+		}
+		if(i > board.length){
+		    return false;
+		}
+		return true;
+	    }
+	}
+	
+    }
+    
+    
+    
+    
+
+    private int checkQueenRow(int col){
+	for(int i = 0; i < board.length; i ++){
+	    if(board[i][col] > 0){
+		return i;
+	    }
+	}
+	return -1;
+    }
+    
+    /*   private boolean solveH(int col){
 	if (col == board.length - 1 ){
-	    printSolution();
 	    for(int i = 0; i < board.length; i++){
 		for (int i2 = 0; i2 < board.length; i2 ++){
 		    removeQueen(i2, col);
-		}                                                                                                                            
+		}
+		System.out.println("REACHED");
 		if(addQueen(i,col)){
-		    return true;
+
+		    ;
 		}
 	    }
 	    return false;
-	};
+	}
+	printSolution();
 	System.out.println(toStringDebug());
 	for (int i = 0; i < board.length; i++){
 	    for (int i2 = 0; i2 < board.length; i2 ++){
@@ -65,7 +100,9 @@ public class QueenBoard{
 	    }
 	}
 	return false;
-    }
+	}
+    */
+	
     
     public void printSolution(){
 	/**Print the board like toString, except
