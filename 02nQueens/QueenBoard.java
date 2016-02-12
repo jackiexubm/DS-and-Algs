@@ -46,28 +46,17 @@ public class QueenBoard{
 	    }else{
 		int i = 1;
 		while(!addQueen(i,col)){
+		    if(i > board.length){
+			return false;
+		    }
 		    i = i + 1;
-		}
-		if(i > board.length){
-		    return false;
 		}
 		return true;
 	    }
 	}
-	
-    }
-    
-    
-    
-    
 
-    private int checkQueenRow(int col){
-	for(int i = 0; i < board.length; i ++){
-	    if(board[i][col] > 0){
-		return i;
-	    }
-	}
-	return -1;
+	
+	
     }
     
     /*   private boolean solveH(int col){
