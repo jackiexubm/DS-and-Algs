@@ -19,11 +19,10 @@ public class KnightBoard{
     }
 
     public boolean solveH(int moveNum, int x, int y){
-	if(x < 0 || x >= cols || y < 0 || y >= rows){
+	if(x < 0 || x >= rows || y < 0 || y >= cols){
 	    return false;
 	}
 	if(board[x][y] >= 1){
-	    
 	    return false;
 	}
 	
@@ -51,7 +50,7 @@ public class KnightBoard{
     public void printSolution(){
 	String ret  = "";
 	for (int x = 0; x < board.length; x ++){
-	    for (int y = 0; y < board.length; y ++){
+	    for (int y = 0; y < board[0].length; y ++){
 		if (board[x][y] >= 1000){
 		    ret = ret + " " + board[x][y] + " ";
 		}else if (board[x][y] >= 100){
