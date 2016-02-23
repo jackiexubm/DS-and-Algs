@@ -37,27 +37,39 @@ public class QueenBoard{
     /**
      *Helper method fr solve. 
      */
-    private boolean solveH(int col){
-	if (col == board.length - 1){
-	    if(checkQueenRow(col) < 0){
-		if(addQueen(0,col)){
-		    return true;
-		}
-	    }else{
-		int i = 1;
-		while(!addQueen(i,col)){
-		    if(i > board.length){
-			return false;
-		    }
-		    i = i + 1;
-		}
-		return true;
-	    }
+
+    private boolean solveH(int row,int col){
+	if(col == board.length - 1){
+	    
 	}
 
-	
+	if(addQueen(row,col)){
+	    return solveH(0,col + 1);
+	}
 	
     }
+
+    
+    /*private boolean solveH(int col){
+      if (col == board.length - 1){
+      if(checkQueenRow(col) < 0){
+      if(addQueen(0,col)){
+      return true;
+      }
+      }else{
+      int i = 1;
+      while(!addQueen(i,col)){
+      if(i > board.length){
+      return false;
+      }
+      i = i + 1;
+      }
+      return true;
+      }
+      }	
+      }
+    */
+    
     
     /*   private boolean solveH(int col){
 	if (col == board.length - 1 ){
