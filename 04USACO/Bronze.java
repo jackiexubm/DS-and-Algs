@@ -3,15 +3,13 @@ import java.io.FileNotFoundException;
 import java.io.File;
 public class Bronze {
 
-
-
 	public static void main(String[] args){
 		int[][] pasture;
 		int rows;
 		int cols;
 		int lakeElevation;
-		int[] stompCol;
 		int[] stompRow;
+		int[] stompCol;
 		int[] stompDepth;
 
 		if(args.length < 1){
@@ -32,29 +30,17 @@ public class Bronze {
 						pasture[row][col] = Integer.parseInt(scanner.next());	
 					}
 				}
-				stompCol = new int[stomps];
 				stompRow = new int[stomps];
+				stompCol = new int[stomps];
 				stompDepth = new int[stomps];
 				for (int i = 0; i < stomps; i++) {
-					stompCol[i] = Integer.parseInt(scanner.next());
 					stompRow[i] = Integer.parseInt(scanner.next());
+					stompCol[i] = Integer.parseInt(scanner.next());					
 					stompDepth[i] = Integer.parseInt(scanner.next());
 				}
 
-			printPasture(pasture);
-			System.out.println(getVolume(pasture,22)); 
-
-			
-
-
-
-
-
-
-
-
-
-
+				pasture = stomp(pasture,stompRow,stompCol,stompDepth);
+				System.out.println(getVolume(pasture,lakeElevation));
 
 			}
 			catch (FileNotFoundException ex)
@@ -63,6 +49,30 @@ public class Bronze {
 			}
 		}
 	}
+
+
+	public static int[][] stomp(int[][] pasture, int[] stompRow, int[] stompCol, int[] stompDepth){
+		for(int i = 0; i < stompRow.length; i++){
+			int highest = 0;
+			for(int row = stompRow[i] - 1; row < stompRow[i] + 2 && row < pasture.length; row++){
+				for(int col = stompCol[i] - 1; col < stompCol[i] + 2 && col < pasture[0].length; col++){
+					if(pasture[row][col] > highest){
+						highest = pasture[row][col];
+					}
+				}
+			}
+			int newHighest = highest - stompDepth[i];
+			for(int row = stompRow[i] - 1; row < stompRow[i] + 2 && row < pasture.length; row++){
+				for(int col = stompCol[i] - 1; col < stompCol[i] + 2 && col < pasture[0].length; col++){
+					if(pasture[row][col] > newHighest){
+						pasture[row][col] = newHighest;
+					}
+				}
+			}
+		}
+		return pasture;
+	}
+
 
 	public static int getVolume(int[][] pasture, int elevation){
 		int[][] pastureDepth = new int[pasture.length][pasture[0].length];
@@ -84,6 +94,7 @@ public class Bronze {
 		}
 		return 5184 * aggregatedDepth;
 	}
+
 
 	public static void printPasture(int[][] board){
 		String ret  = "";
