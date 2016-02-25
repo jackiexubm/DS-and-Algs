@@ -94,7 +94,7 @@ public class Maze{
         	Date s = new Date();
         	if(animate){
         		System.out.println(this);
-        		wait(200);
+        		wait(20);
         	}
 
         //COMPLETE SOLVE
@@ -104,22 +104,17 @@ public class Maze{
         		System.out.print(s);
         		maze[row][col] = '@';
         		if(maze[row][col + 1] != '#' && maze[row][col + 1] != '.' && maze[row][col + 1] != '@' && solve(row,col + 1)){
-        			System.out.print("down");
         			return true;
         		}else
         		if(maze[row + 1][col] != '#' && maze[row + 1][col] != '.' && maze[row + 1][col] != '@' && solve(row + 1,col)){
-        			System.out.print("right");
         			return true;
         		}else
         		if(maze[row][col - 1] != '#' && maze[row][col - 1] != '.' && maze[row][col - 1] != '@' && solve(row,col - 1)){
-        			System.out.print("up");
         			return true;
         		}else
         		if(maze[row - 1][col] != '#' && maze[row - 1][col] != '.' && maze[row - 1][col] != '@' && solve(row - 1,col)){
-        			System.out.print("left");
         			return true;
         		}else{
-        			System.out.print("back");
         			maze[row][col] = '.';
         		}
         	}
