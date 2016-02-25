@@ -12,42 +12,38 @@ public class Bronze {
 		int[] stompCol;
 		int[] stompDepth;
 
-		if(args.length < 1){
-			System.out.println("Please enter a filename with the extension after java Bronze");
-		}else{
-			try
-			{
-				String filename = args[0];
-				File file = new File(filename);
-				Scanner scanner = new Scanner(file);
-				rows = Integer.parseInt(scanner.next());
-				cols = Integer.parseInt(scanner.next());
-				lakeElevation = Integer.parseInt(scanner.next());
-				int stomps = Integer.parseInt(scanner.next());
-				pasture = new int[rows][cols];
-				for (int row = 0; row < rows; row ++) {
-					for (int col = 0; col < cols; col++) {
-						pasture[row][col] = Integer.parseInt(scanner.next());	
-					}
+		try
+		{
+			File file = new File("makelake.in");
+			Scanner scanner = new Scanner(file);
+			rows = Integer.parseInt(scanner.next());
+			cols = Integer.parseInt(scanner.next());
+			lakeElevation = Integer.parseInt(scanner.next());
+			int stomps = Integer.parseInt(scanner.next());
+			pasture = new int[rows][cols];
+			for (int row = 0; row < rows; row ++) {
+				for (int col = 0; col < cols; col++) {
+					pasture[row][col] = Integer.parseInt(scanner.next());	
 				}
-				stompRow = new int[stomps];
-				stompCol = new int[stomps];
-				stompDepth = new int[stomps];
-				for (int i = 0; i < stomps; i++) {
-					stompRow[i] = Integer.parseInt(scanner.next());
-					stompCol[i] = Integer.parseInt(scanner.next());					
-					stompDepth[i] = Integer.parseInt(scanner.next());
-				}
-
-				pasture = stomp(pasture,stompRow,stompCol,stompDepth);
-				System.out.println(getVolume(pasture,lakeElevation));
-
 			}
-			catch (FileNotFoundException ex)
-			{
-				System.out.println("FileNotFoundException");
+			stompRow = new int[stomps];
+			stompCol = new int[stomps];
+			stompDepth = new int[stomps];
+			for (int i = 0; i < stomps; i++) {
+				stompRow[i] = Integer.parseInt(scanner.next());
+				stompCol[i] = Integer.parseInt(scanner.next());					
+				stompDepth[i] = Integer.parseInt(scanner.next());
 			}
+
+			pasture = stomp(pasture,stompRow,stompCol,stompDepth);
+			System.out.println("" + getVolume(pasture,lakeElevation) + ",6,Xu,Jackie");
+
 		}
+		catch (FileNotFoundException ex)
+		{
+			System.out.println("Please put a makelake.in file in the directory");
+		}
+		
 	}
 
 
