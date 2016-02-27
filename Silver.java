@@ -10,16 +10,15 @@ public class Silver{
 	int startCol;
 	int endRow;
 	int endCol;
-	int solutions;
+	int solutions = 0;
 	char[][] pasture;
 
 	public Silver(){
-		scanner = new Scanner("Placeholder");
 		try{
 			File f = new File("ctravel.in");
 			scanner = new Scanner(f);
 		}catch(FileNotFoundException e){
-			System.out.println(" ctravel.in not found in this directory");
+			System.out.println("ctravel.in not found in this directory");
 		}
 		rows = Integer.parseInt(scanner.next());
 		cols = Integer.parseInt(scanner.next());
@@ -35,25 +34,18 @@ public class Silver{
 				map = map.substring(1);
 			}
 		}
-
 		startRow = Integer.parseInt(scanner.next()) - 1;
 		startCol = Integer.parseInt(scanner.next()) - 1;
 		endRow = Integer.parseInt(scanner.next()) - 1;
 		endCol = Integer.parseInt(scanner.next()) - 1;
-		solutions = 0;
 	}
 
 	public boolean solve(int row, int col, int sec){
-		if(sec == 0 && row == endRow && col == endCol){
-			return true;
-		}
-		if(sec < 1){
+		if(sec == 0){
+			if(row == endRow && col == endCol) return true;
 			return false;
 		}
-		if(row < 0 || row > pasture.length - 1|| col < 0 || col > pasture[0].length - 1){
-			return false;
-		}
-		if(endRow - row + (endCol - col) > sec){
+		if(row < 0 || row > pasture.length - 1|| col < 0 || col > pasture[0].length - 1 || endRow - row + (endCol - col) > sec){
 			return false;
 		}
 		if(pasture[row][col] == '*'){
@@ -77,21 +69,9 @@ public class Silver{
 		return false;
 	}
 
-	public void printPasture(){
-		String ret  = "";
-		for (int x = 0; x < pasture.length; x ++){
-			for (int y = 0; y < pasture[0].length; y ++){
-				ret = ret + pasture[x][y];
-			}
-			ret += "\n";
-		}
-		System.out.println(ret);
-	}
-
 	public static void main(String[] args) {
 		Silver test = new Silver();
 		test.solve(test.startRow,test.startCol,test.secs);
 		System.out.println(test.solutions);
 	}
-
 }
