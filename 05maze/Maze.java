@@ -67,7 +67,7 @@ public class Maze{
        When no S is contained in maze, print an error and return false.
     */
        public boolean solve(){
-       	if(startx < 0){
+       	if(startx < 1){
        		System.out.println("No starting point 'S' found in maze.");
        		return false;
        	}else{
