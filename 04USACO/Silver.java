@@ -74,7 +74,7 @@ public class Silver{
 				}
 			}
 			pasture = newPasture;
-			printPasture();
+			//	printPasture();
 			secs = secs - 1;
 		}
 		
@@ -103,7 +103,7 @@ public class Silver{
 
 	public static void main(String[] args) {
 		Silver test = new Silver();
-		test.printPasture();
+		//		test.printPasture();
 		test.solve();
 		System.out.println(test.solutions);
 	}
