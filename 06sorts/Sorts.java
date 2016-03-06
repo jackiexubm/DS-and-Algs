@@ -12,7 +12,7 @@ public class Sorts{
 				System.out.print(data[i] + ", ");
 				i++;
 			}
-			System.out.print(data[i] + "]");
+			System.out.println(data[i] + " ]");
 		}
 	}
 
@@ -21,6 +21,15 @@ public class Sorts{
 		for(int i = 0; i < data.length; i ++){
 			data[i] = rand.nextInt(Integer.MAX_VALUE) - (2 * rand.nextInt(Integer.MAX_VALUE));
 		}
+	}
+
+	public static boolean checkOrder(int[] data){
+		for(int i = 0; i < data.length - 1; i ++){
+			if (data[i] > data[i + 1]) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static void insertionSort(int[] data){
@@ -110,12 +119,69 @@ public class Sorts{
 		}	
 	}
 
-	public static void mergeSort(int[] data){
 
+
+	public static void mergeSort(int[] data){
+		mergeSortHelper(data, 0, mergeHalf(data.length), mergeHalf(data.length) + 1, data.length - 1);
+	}
+
+	public static void mergeSortHelper(int[] data, int s1, int e1, int s2, int e2){
+		if(e1 == s1 && s2 == e2){
+			merge(data,s1,e1,s2,e2);
+		}else if (s2 == e2) {
+			mergeSortHelper(data,s1, s1 + mergeHalf(e1 - s1),s1 + mergeHalf(e1 - s1) + 1, e1);
+			mergeSortHelper(data,s2, e2, s2, e2);
+			merge(data,s1,e1,s2,e2);
+		}else if (s1 == e1) {
+			mergeSortHelper(data,s1, e1, s2, e2);
+			mergeSortHelper(data,s2, s2 + mergeHalf(e2 - s2),s2 + mergeHalf(e2 - s2) + 1, e2);
+			merge(data,s1,e1,s2,e2);
+		}else{
+			mergeSortHelper(data,s1, s1 + mergeHalf(e1 - s1),s1 + mergeHalf(e1 - s1) + 1, e1);
+			mergeSortHelper(data,s2, s2 + mergeHalf(e2 - s2),s2 + mergeHalf(e2 - s2) + 1, e2);
+			merge(data,s1,e1,s2,e2);
+		}
 	}
 
 	public static void merge(int[] data, int s1, int e1, int s2, int e2){
+		int[] newData = new int[e2 - s2 + (e1 - s1) + 2];
+		int start = s1;
 
+		if(e1 == e2){
+			return;
+		}
+
+		if(s2 < s1){
+			start = s2;
+		}
+
+		for (int i = 0; i < newData.length; i++) {
+			if(s1 > e1){
+				newData[i] = data[s2];
+				s2++;
+			}else if(s2 > e2){
+				newData[i] = data[s1];
+				s1++;
+			}else if(data[s1] <= data[s2]){
+				newData[i] = data[s1];
+				s1++;
+			}else if(data[s2] < data[s1]){
+				
+				newData[i] = data[s2];
+				s2++;
+			}
+		}
+
+		for (int i = 0; i < newData.length ; i++) {
+			data[i + start] = newData[i];
+		}
+	}
+
+	public static int mergeHalf(int n){
+		if (n % 2 == 0){
+			return n / 2;
+		}
+		return (n - 1) / 2;
 	}
 
 }
