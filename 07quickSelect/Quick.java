@@ -1,14 +1,32 @@
+import java.util.Random;
 public class Quick{
 
-	private static int partition(int[]data, int left, int right){
-		return 0;
+	private static int partition(int[] data, int left, int right){
+		Random rand = new Random();
+		int pos = left + rand.nextInt(right - left + 1);
+		int[] parted = new int[right - left + 1];
+		int l = 0;
+		int r = parted.length - 1;
+		int equals = 0;
+		for (int i = left; i <= right; i++) {
+			if (data[i] < data[pos]) {
+				parted[l] = data[i];
+				l++;
+			}else if (data[i] > data[pos]){
+				parted[r] = data[i];
+				r--;
+			}else{
+				equals++;
+			}
+		}
+		for (int i = 0; i < equals; i++) {
+			parted[i + l] = data[pos];
+		}
+		for (int i = 0; i < parted.length; i++) {
+			data[left + i] = parted[i];
+		}
+		return l + left;
 	}
-	//choose a random partition element  at a location from left to right inclusive.
-	//partition the array such that the randomly chosen element divides all values smaller and larger than it.
-//smaller elements on the left side of the partition, larger on the right side
-//return the index of the partition element.
-//    this allows your quickselect method to decide where to go next.
-
 
 	public static int quickselect(int[]data, int k){
 		return 0;
@@ -39,14 +57,16 @@ public class Quick{
 		}
 	}
 
-	public static void swap(int[] data, int pos1, int pos2){
-		int holder = data[pos2];
-		data[pos2] = data[pos1];
-		data[pos1] = holder;
-	}
+	// public static void swap(int[] data, int pos1, int pos2){
+	// 	int holder = data[pos2];
+	// 	data[pos2] = data[pos1];
+	// 	data[pos1] = holder;
+	// }
 
 	public static void main(String[]args){
-		int[] a = new int[10];
+		int[] a = {9,8,7,6,5,4,3,2,1};
+		printArray(a);
+		System.out.println(partition(a,5,8));
 		printArray(a);
 	}
 

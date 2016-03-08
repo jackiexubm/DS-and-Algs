@@ -119,8 +119,6 @@ public class Sorts{
 		}	
 	}
 
-
-
 	public static void mergeSort(int[] data){
 		mergeSortHelper(data, 0, mergeHalf(data.length), mergeHalf(data.length) + 1, data.length - 1);
 	}
@@ -146,15 +144,12 @@ public class Sorts{
 	public static void merge(int[] data, int s1, int e1, int s2, int e2){
 		int[] newData = new int[e2 - s2 + (e1 - s1) + 2];
 		int start = s1;
-
 		if(e1 == e2){
 			return;
 		}
-
 		if(s2 < s1){
 			start = s2;
 		}
-
 		for (int i = 0; i < newData.length; i++) {
 			if(s1 > e1){
 				newData[i] = data[s2];
@@ -165,36 +160,20 @@ public class Sorts{
 			}else if(data[s1] <= data[s2]){
 				newData[i] = data[s1];
 				s1++;
-			}else if(data[s2] < data[s1]){
-				
+			}else if(data[s2] < data[s1]){		
 				newData[i] = data[s2];
 				s2++;
 			}
 		}
-
 		for (int i = 0; i < newData.length ; i++) {
 			data[i + start] = newData[i];
 		}
 	}
-
 	public static int mergeHalf(int n){
 		if (n % 2 == 0){
 			return n / 2;
 		}
 		return (n - 1) / 2;
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
