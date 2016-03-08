@@ -14,7 +14,7 @@ public class Quick{
 				l++;
 			}else if (data[i] > data[pos]){
 				parted[r] = data[i];
-				r--;
+				r--; 
 			}else{
 				equals++;
 			}
@@ -28,20 +28,23 @@ public class Quick{
 		return l + left;
 	}
 
-	public static int quickselect(int[]data, int k){
-		return 0;
+	public static int quickselect(int[] data, int k){
+		if (k < 0 || k > data.length  - 1) {
+			throw new IllegalArgumentException("Not in index range of data set.");
+		}
+		return quickselect(data, k , 0 , data.length - 1);
 	}
-	//return the kth smallest value.
-// when k = 0 return the smallest.
-// 0 <= k < data.length
 
-	private static int quickselect(int[]data, int k, int left, int right){
-		return 0;
+	private static int quickselect(int[] data, int k, int left, int right){
+		int n = partition(data, left, right);
+		if (n == k) {
+			return data[n];
+		}else if (k < n) {
+			return quickselect(data, k, left, n - 1);
+		}else{
+			return quickselect(data, k , n + 1, right);
+		}
 	}
-	//return the kth smallest value in the given left/right range
-// left <= k <= right
-//start by calling the helper as follows:
-//    quickselect(data,k,0,data.length-1)
 
 	public static void printArray(int[] data){
 		if (data.length == 0) {
@@ -57,17 +60,12 @@ public class Quick{
 		}
 	}
 
-	// public static void swap(int[] data, int pos1, int pos2){
-	// 	int holder = data[pos2];
-	// 	data[pos2] = data[pos1];
-	// 	data[pos1] = holder;
-	// }
 
-	public static void main(String[]args){
-		int[] a = {9,8,7,6,5,4,3,2,1};
-		printArray(a);
-		System.out.println(partition(a,5,8));
-		printArray(a);
-	}
+	// public static void main(String[]args){
+	// 	int[] a = {9,8,7,6,5,4,3,2,1};
+	// 	printArray(a);
+	// 	System.out.println(quickselect(a,0)); 
+	// 	printArray(a);
+	// }
 
 }
