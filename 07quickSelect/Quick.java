@@ -1,11 +1,12 @@
 import java.util.Random;
+import java.util.Arrays;
 public class Quick{
 
 	public static String name(){
-		return "6,Xu,Jackie"; // or "6,Last,First" 
+		return "6,Xu,Jackie"; 
 	}
 
-	private static int partition(int[] data, int left, int right){
+	private static int[] partition(int[] data, int left, int right){
 		Random rand = new Random();
 		int pos = left + rand.nextInt(right - left + 1);
 		int[] parted = new int[right - left + 1];
@@ -29,7 +30,10 @@ public class Quick{
 		for (int i = 0; i < parted.length; i++) {
 			data[left + i] = parted[i];
 		}
-		return l + left;
+		int[] ret = new int[2];
+		ret[0] = l + left;
+		ret[1] = l + left + equals;
+		return ret;
 	}
 
 	public static int quickselect(int[] data, int k){
@@ -40,13 +44,14 @@ public class Quick{
 	}
 
 	private static int quickselect(int[] data, int k, int left, int right){
-		int n = partition(data, left, right);
-		if (n == k) {
-			return data[n];
-		}else if (k < n) {
-			return quickselect(data, k, left, n - 1);
+		int[] ret = partition(data, left, right);
+		int middleLeft = ret[0];
+		if (middleLeft == k) {
+			return data[middleLeft];
+		}else if (k < middleLeft) {
+			return quickselect(data, k, left, middleLeft - 1);
 		}else{
-			return quickselect(data, k , n + 1, right);
+			return quickselect(data, k , middleLeft + 1, right);
 		}
 	}
 
@@ -71,18 +76,21 @@ public class Quick{
 	private static void quickSort(int[] data,int left,int right){
 		if (right < left) {
 		}else{
-			int n = partition(data, left, right);
-			quickSort(data, left, n - 1);
-			quickSort(data, n + 1, right);
+			int[] ret = partition(data, left, right);
+			int middleLeft = ret[0];
+			int middleRight = ret[1];
+			quickSort(data, left, middleLeft - 1);
+			quickSort(data, middleRight + 1, right);
 		}
 	}
 
 
 	// public static void main(String[]args){
-	// 	int[] a = {4,0,6,8,2,3,1,7,5,9,-3,42,214,12,321,44,124,214,124,124,123,213,123,12,312,3143,24235};
-	// 	printArray(a);
-	// 	quickSort(a);
-	// 	printArray(a);
+	// 	int[] a = new int[5000000];
+	// 	for (int i = 0;i < a.length ; i++) {
+	// 		a[i] = (int)(Math.random() * 3);
+	// 	}
+	
 	// }
 
 }
