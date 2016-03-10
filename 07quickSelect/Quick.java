@@ -69,15 +69,20 @@ public class Quick{
 	}
 
 	private static void quickSort(int[] data,int left,int right){
-		
+		if (right < left) {
+		}else{
+			int n = partition(data, left, right);
+			quickSort(data, left, n - 1);
+			quickSort(data, n + 1, right);
+		}
 	}
 
 
-	public static void main(String[]args){
-		int[] a = {4,0,6,8,2,3,1,7,5,9};
-		printArray(a);
-		System.out.println(quickselect(a,9)); 
-		printArray(a);
-	}
+	// public static void main(String[]args){
+	// 	int[] a = {4,0,6,8,2,3,1,7,5,9,-3,42,214,12,321,44,124,214,124,124,123,213,123,12,312,3143,24235};
+	// 	printArray(a);
+	// 	quickSort(a);
+	// 	printArray(a);
+	// }
 
 }
