@@ -1,6 +1,10 @@
 import java.util.Random;
 public class Quick{
 
+	public static String name(){
+		return "6,Xu,Jackie"; // or "6,Last,First" 
+	}
+
 	private static int partition(int[] data, int left, int right){
 		Random rand = new Random();
 		int pos = left + rand.nextInt(right - left + 1);
@@ -60,12 +64,20 @@ public class Quick{
 		}
 	}
 
+	public static void quickSort(int[] data){
+		quickSort(data, 0, data.length - 1);
+	}
 
-	// public static void main(String[]args){
-	// 	int[] a = {9,8,7,6,5,4,3,2,1};
-	// 	printArray(a);
-	// 	System.out.println(quickselect(a,0)); 
-	// 	printArray(a);
-	// }
+	private static void quickSort(int[] data,int left,int right){
+		
+	}
+
+
+	public static void main(String[]args){
+		int[] a = {4,0,6,8,2,3,1,7,5,9};
+		printArray(a);
+		System.out.println(quickselect(a,9)); 
+		printArray(a);
+	}
 
 }

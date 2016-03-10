@@ -1,6 +1,10 @@
 import java.util.Random;
 public class Sorts{
 
+	public static String name(){
+		return "6,Xu,Jackie"; // or "6,Last,First" 
+	}
+
 	private static String debug = "false";
 	public static void printArray(int[] data){
 		if (data.length == 0) {
