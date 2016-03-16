@@ -38,6 +38,9 @@ public class MyLinkedList{
 	}
 
 	public int size(){
+		if (start == null) {
+			return 0;
+		}
 		int length = 0;
 		LNode current = start;
 		while(current.next != null){
@@ -61,6 +64,10 @@ public class MyLinkedList{
 	}
 
 	public String toString(){
+		if (start == null) {
+			return "[ ]";
+		}
+
 		LNode current = start;
 		String s = "[ ";
 		while (current.next != null) {
