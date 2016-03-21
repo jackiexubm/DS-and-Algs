@@ -6,6 +6,10 @@ public class Driver{
 		a.add("c");
 		a.add("d");
 		a.add("e");
+		for (int i = 1;i < 10 ;i = i + 2 ) {
+			a.add(i,"z");
+		}
+		
 
 		
 System.out.println(a.size);
