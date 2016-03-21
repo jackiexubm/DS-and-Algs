@@ -1,8 +1,14 @@
 public class Driver{
     public static void main(String[] args){
-		MyLinkedList a = new MyLinkedList();
-		a.add(5);
-		a.set(0,10);
+		MyLinkedList<String> a = new MyLinkedList<String>();
+		a.add("a");
+		a.add("bjlksajdlkasjdl");
+		a.add("c");
+		a.add("d");
+		a.add("e");
+
+		
+System.out.println(a.size);
 		System.out.println(a.size());
 		System.out.println(a);
 
