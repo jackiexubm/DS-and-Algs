@@ -22,6 +22,9 @@ public class MyLinkedList<T> {
     }
 
     public T set(int index, T newValue) {
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
         LNode current = start;
         while (index > 0) {
             if (current.next == null) {
@@ -61,8 +64,8 @@ public class MyLinkedList<T> {
     }
 
     public boolean add(int index, T value){
-        if (index > size) {
-            return false;
+        if (index > size || index < 0) {
+            throw new IndexOutOfBoundsException();
         }else if (index == size) {
             this.add(value);
             return true;
@@ -74,7 +77,7 @@ public class MyLinkedList<T> {
             return true;
         }else{
             LNode current = start;
-            while(index > 1){
+            while(index > 0){
                 current = current.next;
                 index--;
             }
@@ -86,8 +89,32 @@ public class MyLinkedList<T> {
         }
     }
 
+    public T remove(int index){
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }else if (index == 0) {
+            LNode ret = start;
+            start = start.next;
+            size--;
+            return ret.value;
+        }else{
+            LNode current = start;
+            while(index > 1){
+                current = current.next;
+                index--;
+            }
+            LNode ret = current;
+            if (current.next.next == null) {
+                end = current;
+            }
+            current.next = current.next.next;   
+            size--;
+            return ret.value;
+        }
+    }
+
     public String toString() {
-        String s = "[ ";
+        String s = "[";
         LNode current = start;
         if (start != null) {
             while (current.next != null) {
@@ -96,7 +123,24 @@ public class MyLinkedList<T> {
             }
             s += current.value;
         }
-        return s + " ]";
+        return s + "]";
+    }
+
+    public String toString(boolean boo) {
+        String s = "[";
+        LNode current = start;
+        if (start != null) {
+            while (current.next != null) {
+                s += current.value.toString() + ", ";
+                current = current.next;
+            }
+            s += current.value;
+        }
+        s += "]";
+        if (boo) {
+            s += "     Head = " + start.value + "   Tail = " + end.value;
+        }
+        return s;
     }
 
     private class LNode {
