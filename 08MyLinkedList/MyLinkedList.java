@@ -1,6 +1,7 @@
-import java.util.Objects;
+import java.util.*;
 
-public class MyLinkedList<T> {
+
+public class MyLinkedList<T> implements Iterable<T> {
     private LNode start;
     private LNode end;
     int size;
@@ -143,6 +144,35 @@ public class MyLinkedList<T> {
         return s;
     }
 
+    public Iterator<T> iterator(){
+        return new myLinkedListIterator();
+    }
+
+    public class myLinkedListIterator implements Iterator<T>{
+        private LNode current;
+
+        public myLinkedListIterator(){
+        	current = start;
+        }
+    
+        public boolean hasNext(){
+            return current.next != null; 
+        }
+
+        public T next(){
+        	T temp = current.value;
+        	current = current.next;
+            if (current == null) {
+                throw new NoSuchElementException();
+            }
+            return current.value;
+        }
+
+        public void remove(){
+            throw new UnsupportedOperationException();
+        }
+    }
+
     private class LNode {
 
         public T value;
@@ -168,6 +198,17 @@ public class MyLinkedList<T> {
         // 	value = n;
         // }
 
+    }
+
+    public static void main(String[] args) {
+    	MyLinkedList<Integer> n = new MyLinkedList<Integer>();
+    	for (int i = 0; i < 20; i = i + 2) {
+    		n.add(i);
+    	}
+    	for (Integer i : n) {
+    		System.out.println(i);
+    	}
+ 		System.out.println(n);
     }
 
 }
