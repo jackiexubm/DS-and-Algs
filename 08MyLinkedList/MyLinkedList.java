@@ -160,7 +160,7 @@ public class MyLinkedList<T> implements Iterable<T> {
         }
 
         public T next(){
-        	T temp = current.value;
+        	//T temp = current.value;
         	current = current.next;
             if (current == null) {
                 throw new NoSuchElementException();
@@ -208,6 +208,15 @@ public class MyLinkedList<T> implements Iterable<T> {
     	for (Integer i : n) {
     		System.out.println(i);
     	}
+
+    	Iterator<Integer> it = n.iterator();       // iterators allow multiple iterations simultaneous
+    	Iterator<Integer> it2 = n.iterator();
+    	it2.next();
+    	while(it2.hasNext()){
+    		System.out.println(it.next() + " vs " + it2.next());
+    	}
+
+
  		System.out.println(n);
     }
 
