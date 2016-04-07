@@ -1,26 +1,70 @@
 public class MyDeque<T> {
 	private T[] data;
+	int size;
+	int start;
+	int end;
 
+	@SuppressWarnings("unchecked")
 	public MyDeque(){
-		Object[] dat = new Object[10];
-		data = (T)dat;
+		data = (T[]) new Object[10];
+		start = 0;
+		end = 0;
+		size = 0;
 	}
 
 	public String toString(){
-		String s = "[";
-		for (int i = 0; i < data.length ; i++) {
-			s += data[i].toString();
+		String s = "[ ";
+		// if (size == 0) {
+		// 	return "[ ]";
+		// }
+		for (int i = 0; i < data.length - 1; i++) {
+			if (data[i] == null) {
+				s += " , ";
+			}else{
+				s += data[i].toString() + " , ";
+			}
 		}
-		return s + "]";
+		if (data[data.length - 1] == null) {
+			s += "";
+		}else{
+			s += data[data.length - 1].toString();
+		}
+		return s + " ]";
 	}
 
-	// public void addFirst(T value){
+	public void addFirst(T value){ 
+		if (size == 0) {
+			data[start] = value;
+		}else{
+			if (size == data.length) {
+				resize();
+			}
+			if (start == 0) {
+				start = data.length - 1;
+			}else{
+				start --;
+			}
+			data[start] = value;
+		}
+		size ++;
+	}
 
-	// }
-
-	// public void addLast(T value){
-
-	// }
+	public void addLast(T value){
+		if (size == 0) {
+			data[start] = value;
+		}else{
+			if (size == data.length) {
+				resize();
+			}
+			if (end == data.length - 1) {
+				end = 0;
+			}else{
+				end ++;
+			}
+			data[end] = value;
+		}
+		size ++;
+	}
 
 	// public T removeFirst(){
 
@@ -38,8 +82,54 @@ public class MyDeque<T> {
 
 	// }
 
+	@SuppressWarnings("unchecked")
+	private void resize(){
+		T[] temp = (T[]) new Object[data.length * 2];
+		if (end < start) {
+			for (int i = 0; i <= end; i++) {
+				temp[i] = data[i];
+			}
+			for (int i = end + 1; i < data.length; i++) {
+				temp[i + data.length] = data[i];
+			}
+			start = start + data.length;
+		}else{
+			for (int i = 0; i < data.length; i ++) {
+				temp[i] = data[i];
+			}
+		}
+		data = temp;
+
+	}
+
 	public static void main(String[] args) {
-		MyDeque a = new MyDeque();
+		MyDeque<Integer> a = new MyDeque<Integer>();
+		
+		a.addLast(5);
+		a.addFirst(10);
+		a.addLast(5);
+		a.addFirst(10);
+		a.addLast(5);
+		a.addFirst(10);
+		a.addLast(5);
+		a.addFirst(10);
+		a.addLast(5);
+		a.addFirst(10);
+		a.addFirst(5);
+		a.addFirst(10);
+		a.addFirst(10);
+		a.addLast(6);
+		a.addLast(6);
+		a.addLast(6);
+		a.addLast(6);
+		a.addLast(6);
+		a.addLast(6);
+		a.addLast(6);
+		a.addLast(6);
+
+		
 		System.out.println(a);
 	}
+
+
 }
