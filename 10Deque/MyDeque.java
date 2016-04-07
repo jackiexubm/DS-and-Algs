@@ -14,6 +14,18 @@ public class MyDeque<T> {
 	}
 
 	public String toString(){
+		String ret = "[";
+		for (int i = 0 ; i < size - 1 ; i++) {
+			int current = start + i;
+			if (current > data.length - 1) {
+				current = current - data.length;
+			}
+			ret += data[current].toString() + ", ";
+		}
+		return ret + data[end].toString() + "]";
+	}
+
+	public void printData(){
 		String s = "[ ";
 		// if (size == 0) {
 		// 	return "[ ]";
@@ -30,7 +42,7 @@ public class MyDeque<T> {
 		}else{
 			s += data[data.length - 1].toString();
 		}
-		return s + " ]";
+		System.out.println(s + " ]"); 
 	}
 
 	public void addFirst(T value){ 
@@ -154,32 +166,33 @@ public class MyDeque<T> {
 		a.addLast(6);
 		a.addLast(6);
 		a.addLast(6);
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeFirst();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
-		a.removeLast();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeFirst();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
+		// a.removeLast();
 		
 		System.out.println( a.getLast());
 		
 		
 
-		System.out.println(a.size);
+		
+		a.printData();
 		System.out.println(a);
 	}
 
