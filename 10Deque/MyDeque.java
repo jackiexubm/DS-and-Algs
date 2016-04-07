@@ -142,59 +142,5 @@ public class MyDeque<T> {
 		data = temp;
 	}
 
-	public static void main(String[] args) {
-		MyDeque<Integer> a = new MyDeque<Integer>();
-		
-		a.addLast(5);
-		a.addFirst(10);
-		a.addLast(5);
-		a.addFirst(10);
-		a.addLast(5);
-		a.addFirst(10);
-		a.addLast(5);
-		a.addFirst(10);
-		a.addLast(5);
-		a.addFirst(10);
-		a.addFirst(5);
-		a.addFirst(10);
-		a.addFirst(10);
-		a.addLast(6);
-		a.addLast(6);
-		a.addLast(6);
-		a.addLast(6);
-		a.addLast(6);
-		a.addLast(6);
-		a.addLast(6);
-		a.addLast(6);
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeFirst();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		// a.removeLast();
-		
-		System.out.println( a.getLast());
-		
-		
-
-		
-		a.printData();
-		System.out.println(a);
-	}
-
 
 }

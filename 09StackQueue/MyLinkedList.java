@@ -4,6 +4,8 @@ public class MyLinkedList<T> implements Iterable<T>{
     private class LNode{
        private T value;
        private LNode next;
+       private LNode previous;
+
        public LNode(T v){
            value = v;
        }
@@ -52,6 +54,7 @@ public class MyLinkedList<T> implements Iterable<T>{
            }
        };
    } 
+
    public String toString(){
        String ans = "[";
        LNode p = head;
@@ -64,9 +67,11 @@ public class MyLinkedList<T> implements Iterable<T>{
        }
        return ans+"]";
    }
+
    public String toString(boolean b){
        return toString()+" head: "+head +", tail: "+tail;
    }
+
    private LNode getNth(int index){
  //check bounds before calling this method!
        LNode temp = head;
@@ -76,6 +81,7 @@ public class MyLinkedList<T> implements Iterable<T>{
        }
        return temp;
    }
+
    public boolean add(T value){
        if(head == null){
            head = new LNode(value);
@@ -87,6 +93,7 @@ public class MyLinkedList<T> implements Iterable<T>{
        size++;
        return true;
    }
+
    public T remove(int index){
        if(index < 0 || index >= size()){
            throw new IndexOutOfBoundsException("Index: "+index+", Size: "+size());
@@ -111,6 +118,7 @@ public class MyLinkedList<T> implements Iterable<T>{
            return temp.getValue();
        }
    }
+
    public boolean add(int index, T value){
        if(index < 0 || index > size()){
            throw new IndexOutOfBoundsException("Index "+index+", Size: "+size());
@@ -164,4 +172,5 @@ public class MyLinkedList<T> implements Iterable<T>{
        }
        return -1;
    }
+   
 }
