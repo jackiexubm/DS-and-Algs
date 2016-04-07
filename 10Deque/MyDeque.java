@@ -97,13 +97,19 @@ public class MyDeque<T> {
 		return ret;
 	} 
 
-	// public T getFirst(){
+	public T getFirst(){
+		if (size < 1) {
+			throw new NoSuchElementException();
+		}
+		return data[start];
+	}
 
-	// }
-
-	// public T getLast(){
-
-	// }
+	public T getLast(){
+		if (size < 1) {
+			throw new NoSuchElementException();
+		}
+		return data[end];
+	}
 
 	@SuppressWarnings("unchecked")
 	private void resize(){
@@ -168,8 +174,8 @@ public class MyDeque<T> {
 		a.removeLast();
 		a.removeLast();
 		a.removeLast();
-		a.removeLast();
-		a.removeLast();
+		
+		System.out.println( a.getLast());
 		
 		
 
