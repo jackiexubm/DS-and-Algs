@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 public class MyDeque<T> {
 	private T[] data;
 	int size;
@@ -66,13 +67,35 @@ public class MyDeque<T> {
 		size ++;
 	}
 
-	// public T removeFirst(){
-
-	// }  
+	public T removeFirst(){
+		if (size < 1) {
+			throw new NoSuchElementException();
+		}
+		T ret = data[start];
+		data[start] = null;
+		if (start == data.length - 1) {
+			start = 0;
+		}else{
+			start++;
+		}
+		size --;
+		return ret;
+	}  
 	
-	// public T removeLast(){
-
-	// } 
+	public T removeLast(){
+		if (size < 1) {
+			throw new NoSuchElementException();
+		}
+		T ret = data[end];
+		data[end] = null;
+		if (end == 0) {
+			end = data.length - 1;
+		}else{
+			end --;
+		}
+		size --;
+		return ret;
+	} 
 
 	// public T getFirst(){
 
@@ -99,7 +122,6 @@ public class MyDeque<T> {
 			}
 		}
 		data = temp;
-
 	}
 
 	public static void main(String[] args) {
@@ -126,8 +148,32 @@ public class MyDeque<T> {
 		a.addLast(6);
 		a.addLast(6);
 		a.addLast(6);
-
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeFirst();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
+		a.removeLast();
 		
+		
+
+		System.out.println(a.size);
 		System.out.println(a);
 	}
 
