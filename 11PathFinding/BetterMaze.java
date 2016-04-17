@@ -194,9 +194,8 @@ public class BetterMaze{
       Keep going until you find a solution or run out of elements on the frontier.
     **/
       private boolean solve(){  
-        /** IMPLEMENT THIS **/  
-        return false;
-    }    
+        return solveBFS();
+    } 
 
     /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  
@@ -204,7 +203,7 @@ public class BetterMaze{
     }
 
     public BetterMaze(String filename){
-        animate = true;
+        animate = false;
         int maxc = 0;
         int maxr = 0;
         startRow = -1;
@@ -246,8 +245,6 @@ public class BetterMaze{
             }
         }
     }
-
-
 
 
 
@@ -302,8 +299,6 @@ public class BetterMaze{
         }
     } 
     
-
-
 
     
     
