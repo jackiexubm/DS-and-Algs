@@ -35,6 +35,7 @@ public class BetterMaze{
     private int      startRow,startCol,endRow,endCol;
     private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
+    private boolean solved;
 
      /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
@@ -45,8 +46,24 @@ public class BetterMaze{
      *Postcondition:  the correct solution is in the returned array
      **/
     public int[] solutionCoordinates(){
-        /** IMPLEMENT THIS **/      
-        return new int[1];
+        if (solved == false) {
+            return new int[1];
+        }else{
+            return solution;
+        }
+    }
+
+    public void printSolution(){
+        if (solved == true) {
+            String ss = "[";
+        for (int i = 0; i < solution.length - 1; i++) {
+            ss = ss + solution[i] + ",";
+        }
+        ss = ss + solution[solution.length - 1] + "]"; 
+        System.out.println(ss);
+        }else{
+            System.out.println("[] ");
+        }
     }
 
     private ArrayList<Node> getNeighbors(Node current){
@@ -73,7 +90,7 @@ public class BetterMaze{
         Node current =  new Node(startCol,startRow,null);
         placesToGo.add(current);
         while(!(current.getY() == endRow && current.getX() == endCol)){
-            wait(2);
+            //wait(1);
             maze[current.getY()][current.getX()] = '.';
             for(Node cur : getNeighbors(current) ){ 
                 placesToGo.add(cur);
@@ -86,6 +103,7 @@ public class BetterMaze{
             }
         }
 
+        // Draw correct path
 
         ArrayList<Node> sols = new ArrayList<Node>();
         while(current != null){
@@ -104,7 +122,17 @@ public class BetterMaze{
             }          
         }
 
+        // Change solution int array;
+        solution = new int[sols.size() * 2];
+        int i = sols.size() * 2;
+        for (Node cur : sols) {
+            i--;
+            solution[i] = cur.getY();
+            i--;
+            solution[i] = cur.getX();
+        }
 
+        solved = true;
         return true;
     }
 
@@ -113,6 +141,7 @@ public class BetterMaze{
     */ 
    public boolean solveDFS(){  
     /** IMPLEMENT THIS **/  
+    solved = true;
     return false;
 }    
 
@@ -135,6 +164,7 @@ public class BetterMaze{
         int maxr = 0;
         startRow = -1;
         startCol = -1;
+        solved = false;
     //read the whole maze into a single string first
         String ans = "";
         try{
