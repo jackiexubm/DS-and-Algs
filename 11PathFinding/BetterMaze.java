@@ -95,7 +95,10 @@ public class BetterMaze{
             for(Node cur : getNeighbors(current) ){ 
                 placesToGo.add(cur);
             }
-            System.out.println(this.toString());  
+            if (animate) {
+                System.out.println(this.toString());  
+                wait(5);
+            }
             try{
                 current = placesToGo.next();
             }catch(NoSuchElementException e){
@@ -149,7 +152,10 @@ public class BetterMaze{
             for(Node cur : getNeighbors(current) ){ 
                 placesToGo.add(cur);
             }
-            System.out.println(this.toString());  
+            if (animate) {
+                System.out.println(this.toString());  
+                wait(5);
+            }  
             try{
                 current = placesToGo.next();
             }catch(NoSuchElementException e){
