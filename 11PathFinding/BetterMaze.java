@@ -45,7 +45,7 @@ public class BetterMaze{
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
      **/
-    public int[] solutionCoordinates(){
+     public int[] solutionCoordinates(){
         if (solved == false) {
             return new int[1];
         }else{
@@ -56,11 +56,11 @@ public class BetterMaze{
     public void printSolution(){
         if (solved == true) {
             String ss = "[";
-        for (int i = 0; i < solution.length - 1; i++) {
-            ss = ss + solution[i] + ",";
-        }
-        ss = ss + solution[solution.length - 1] + "]"; 
-        System.out.println(ss);
+            for (int i = 0; i < solution.length - 1; i++) {
+                ss = ss + solution[i] + ",";
+            }
+            ss = ss + solution[solution.length - 1] + "]"; 
+            System.out.println(ss);
         }else{
             System.out.println("[] ");
         }
@@ -118,7 +118,7 @@ public class BetterMaze{
             }else if (cur.getLast() == null) {
                 maze[cur.getY()][cur.getX()] = 'S';
             }else {
-            maze[cur.getY()][cur.getX()] = '@';
+                maze[cur.getY()][cur.getX()] = '@';
             }          
         }
 
@@ -137,13 +137,58 @@ public class BetterMaze{
     }
 
 
-   /**initialize the frontier as a stack and call solve
-    */ 
-   public boolean solveDFS(){  
-    /** IMPLEMENT THIS **/  
-    solved = true;
-    return false;
-}    
+
+
+    public boolean solveDFS(){  
+        placesToGo = new FrontierStack<Node>();
+        Node current =  new Node(startCol,startRow,null);
+        placesToGo.add(current);
+        while(!(current.getY() == endRow && current.getX() == endCol)){
+            //wait(1);
+            maze[current.getY()][current.getX()] = '.';
+            for(Node cur : getNeighbors(current) ){ 
+                placesToGo.add(cur);
+            }
+            System.out.println(this.toString());  
+            try{
+                current = placesToGo.next();
+            }catch(NoSuchElementException e){
+                return false;
+            }
+        }
+
+        // Draw correct path
+
+        ArrayList<Node> sols = new ArrayList<Node>();
+        while(current != null){
+            sols.add(current);
+            current = current.getLast();
+        }
+        int n = 1;
+        for (Node cur : sols) {
+            if (n == 1) {
+                maze[cur.getY()][cur.getX()] = 'E';
+                n--;
+            }else if (cur.getLast() == null) {
+                maze[cur.getY()][cur.getX()] = 'S';
+            }else {
+                maze[cur.getY()][cur.getX()] = '@';
+            }          
+        }
+
+        // Change solution int array;
+        solution = new int[sols.size() * 2];
+        int i = sols.size() * 2;
+        for (Node cur : sols) {
+            i--;
+            solution[i] = cur.getY();
+            i--;
+            solution[i] = cur.getX();
+        }
+
+        solved = true;
+        return false;
+    }    
 
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
