@@ -11,7 +11,7 @@ public class FrontierQueue<T> implements Frontier<T>{
 	}
 
 	public T next(){
-		return data.remove();
+		return data.removeFirst();
 	}
 
 	public boolean hasNext(){

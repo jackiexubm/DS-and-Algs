@@ -36,45 +36,74 @@ public class BetterMaze{
     private Frontier<Node> placesToGo;
     private boolean  animate;//default to false
 
-   /**return a COPY of solution.
+     /**return a COPY of solution.
      *This should be : [x1,y1,x2,y2,x3,y3...]
      *the coordinates of the solution from start to end.
      *Precondition : one of the solveXXX methods has already been 
      * called (solveBFS OR solveDFS OR solveAStar)
      *(otherwise an empty array is returned)
      *Postcondition:  the correct solution is in the returned array
-    **/
-   public int[] solutionCoordinates(){
-    /** IMPLEMENT THIS **/      
-    return new int[1];
-}
-
-private ArrayList<Node> getNeighbors(Node current){
-    ArrayList<Node> neighbors = new ArrayList<Node>();
-    int y = current.getY();
-    int x = current.getX();
-    if (y - 1 >= 0 && maze[y - 1][x] != '.' && maze[y - 1][x] != '#') {
-        neighbors.add(new Node(x,y - 1,current));
-    }if (y + 1 < maze[0].length && maze[y + 1][x] != '.' && maze[y + 1][x] != '#') {
-        neighbors.add(new Node(x,y + 1,current));
-    }if (x - 1 >= 0 && maze[y][x - 1] != '.' && maze[y][x - 1] != '#') {
-        neighbors.add(new Node(x - 1,y,current));
-    }if (x + 1 < maze.length && maze[y][x + 1] != '.' && maze[y][x + 1] != '#') {
-        neighbors.add(new Node(x + 1,y,current));
+     **/
+    public int[] solutionCoordinates(){
+        /** IMPLEMENT THIS **/      
+        return new int[1];
     }
-    return neighbors;
-}
+
+    private ArrayList<Node> getNeighbors(Node current){
+        ArrayList<Node> neighbors = new ArrayList<Node>();
+        int y = current.getY();
+        int x = current.getX();
+        if (y - 1 >= 0 && maze[y - 1][x] != '.' && maze[y - 1][x] != '#') {
+            neighbors.add(new Node(x,y - 1,current));
+        }if (y + 1 < maze.length && maze[y + 1][x] != '.' && maze[y + 1][x] != '#') {
+            neighbors.add(new Node(x,y + 1,current));
+        }if (x - 1 >= 0 && maze[y][x - 1] != '.' && maze[y][x - 1] != '#') {
+            neighbors.add(new Node(x - 1,y,current));
+        }if (x + 1 < maze[0].length && maze[y][x + 1] != '.' && maze[y][x + 1] != '#') {
+            neighbors.add(new Node(x + 1,y,current));
+        }
+        return neighbors;
+    }
 
 
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
         placesToGo = new FrontierQueue<Node>();
-        Node current =  new Node(startRow,startCol,null);
+        Node current =  new Node(startCol,startRow,null);
         placesToGo.add(current);
-        // while(current.getX() != endCol && current.getY() != endRow){
+        while(!(current.getY() == endRow && current.getX() == endCol)){
+            wait(2);
+            maze[current.getY()][current.getX()] = '.';
+            for(Node cur : getNeighbors(current) ){ 
+                placesToGo.add(cur);
+            }
+            System.out.println(this.toString());  
+            try{
+                current = placesToGo.next();
+            }catch(NoSuchElementException e){
+                return false;
+            }
+        }
 
-        // }
+
+        ArrayList<Node> sols = new ArrayList<Node>();
+        while(current != null){
+            sols.add(current);
+            current = current.getLast();
+        }
+        int n = 1;
+        for (Node cur : sols) {
+            if (n == 1) {
+                maze[cur.getY()][cur.getX()] = 'E';
+                n--;
+            }else if (cur.getLast() == null) {
+                maze[cur.getY()][cur.getX()] = 'S';
+            }else {
+            maze[cur.getY()][cur.getX()] = '@';
+            }          
+        }
+
 
         return true;
     }
@@ -98,11 +127,10 @@ private ArrayList<Node> getNeighbors(Node current){
     /**mutator for the animate variable  **/
     public void setAnimate(boolean b){  
         animate = b;
-    }    
-
+    }
 
     public BetterMaze(String filename){
-        animate = false;
+        animate = true;
         int maxc = 0;
         int maxr = 0;
         startRow = -1;
