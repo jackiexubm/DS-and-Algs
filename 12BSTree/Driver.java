@@ -1,6 +1,7 @@
 public class Driver{
 	public static void main(String[] args) {
-		BSTree a = new BSTree();
-		System.out.println(a.getHeight());
+		BSTree<Integer> a = new BSTree<Integer>();
+		a.add(5);
+		System.out.println(a);
 	}
 }

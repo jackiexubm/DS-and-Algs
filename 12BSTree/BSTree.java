@@ -57,7 +57,7 @@ public class BSTree<T extends Comparable<T>>{
         }
 
         public String toString(){
-            return "";
+            return data.toString();
         }
 
         public boolean contains(T value){
@@ -92,14 +92,28 @@ public class BSTree<T extends Comparable<T>>{
 
     }
     public String toString(){
+        if (root.getData() == null) {
+            return "";
+        }else{
+            return toStringHelper(root);
+        }
+    }
+
+    private String toStringHelper(Node current){
+        if (current.getLeft() == null && current.getRight() == null) {
+            return current.toString() + " _ _ ";
+        }else if (current.getLeft() == null) {
+            return " _ " + toStringHelper(current.getRight());
+        }else if (current.getRight() == null) {
+            return toStringHelper(current.getLeft()) + " _ ";
+        }else {
+            return toStringHelper(current.getLeft()) + toStringHelper(current.getRight());
+        }
+    }
+
+
+    public boolean contains(T value){
  //check for empty before you do things with root.
-
-       return "";
-   }
-
-
-   public boolean contains(T value){
- //check for empty before you do things with root.
-       return false;
-   }
+        return false;
+    }
 }
