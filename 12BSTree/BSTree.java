@@ -80,17 +80,41 @@ public class BSTree<T extends Comparable<T>>{
     public int getHeight(){
         //call the root's methods
         //check for empty first!
+        if (root.getData() == null) {
+            return 0;
+        }
         return root.height();
     }
 
     public void add(T value){
- //check for empty before you do things with root.
         if (root.getData() == null) {
             root.setData(value);
+        }else {
+        	addHelper(value, root);
         }
-
-
     }
+
+    private void addHelper(T value, Node current){
+    	if (value.compareTo(current.getData()) < 0) {
+    		if (current.getLeft() == null) {
+    			current.setLeft(new Node(value));
+    			return;
+    		}else {
+    			addHelper(value, current.getLeft());
+    			return;
+    		}
+    	}
+    	if (value.compareTo(current.getData()) > 0) {
+    		if (current.getRight() == null) {
+    			current.setRight(new Node(value));
+    			return;
+    		}else {
+    			addHelper(value, current.getRight());
+    			return;
+    		}
+    	}
+    }
+
     public String toString(){
         if (root.getData() == null) {
             return "";
@@ -101,13 +125,13 @@ public class BSTree<T extends Comparable<T>>{
 
     private String toStringHelper(Node current){
         if (current.getLeft() == null && current.getRight() == null) {
-            return current.toString() + " _ _ ";
+            return " " + current.toString() + " _ _";
         }else if (current.getLeft() == null) {
-            return " _ " + toStringHelper(current.getRight());
+            return " " + current.toString() + " _" + toStringHelper(current.getRight());
         }else if (current.getRight() == null) {
-            return toStringHelper(current.getLeft()) + " _ ";
+            return " " + current.toString() + toStringHelper(current.getLeft()) + " _";
         }else {
-            return toStringHelper(current.getLeft()) + toStringHelper(current.getRight());
+            return " " + current.toString() + toStringHelper(current.getLeft()) + toStringHelper(current.getRight());
         }
     }
 
