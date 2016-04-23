@@ -53,7 +53,27 @@ public class BSTree<T extends Comparable<T>>{
 		}
 
 		public void add(T value){
+			if (getData() == null) {
+				setData(value);
+			}else {
+				addHelper(value, this);
+			}
+		}
 
+		private void addHelper(T value, Node current){
+			if (value.compareTo(current.getData()) <= 0) {    // duplicates gets added to the left for now 
+				if (current.getLeft() == null) {
+					current.setLeft(new Node(value));
+				}else {
+					addHelper(value, current.getLeft());
+				}
+			}else if (value.compareTo(current.getData()) > 0) {
+				if (current.getRight() == null) {
+					current.setRight(new Node(value));
+				}else {
+					addHelper(value, current.getRight());
+				}
+			}
 		}
 
 		public String toString(){
@@ -93,8 +113,6 @@ public class BSTree<T extends Comparable<T>>{
 
         //OUTER methods here are wrapper methods for the root
 	public int getHeight(){
-        //call the root's methods
-        //check for empty first!
 		if (root.getData() == null) {
 			return 0;
 		}
@@ -102,30 +120,7 @@ public class BSTree<T extends Comparable<T>>{
 	}
 
 	public void add(T value){
-		if (root.getData() == null) {
-			root.setData(value);
-		}else {
-			addHelper(value, root);
-		}
-	}
-
-	private void addHelper(T value, Node current){
-		if (value.compareTo(current.getData()) <= 0) {
-			if (current.getLeft() == null) {
-				current.setLeft(new Node(value));
-			}else {
-				addHelper(value, current.getLeft());
-			}
-		}else if (value.compareTo(current.getData()) > 0) {
-			if (current.getRight() == null) {
-				current.setRight(new Node(value));
-			}else {
-				addHelper(value, current.getRight());
-			}
-		}else {
-
-		}
-
+		root.add(value);
 	}
 
 	public String toString(){
