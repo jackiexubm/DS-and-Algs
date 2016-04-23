@@ -95,24 +95,22 @@ public class BSTree<T extends Comparable<T>>{
     }
 
     private void addHelper(T value, Node current){
-    	if (value.compareTo(current.getData()) < 0) {
+    	if (value.compareTo(current.getData()) <= 0) {
     		if (current.getLeft() == null) {
     			current.setLeft(new Node(value));
-    			return;
     		}else {
     			addHelper(value, current.getLeft());
-    			return;
     		}
-    	}
-    	if (value.compareTo(current.getData()) > 0) {
+    	}else if (value.compareTo(current.getData()) > 0) {
     		if (current.getRight() == null) {
     			current.setRight(new Node(value));
-    			return;
     		}else {
     			addHelper(value, current.getRight());
-    			return;
     		}
+    	}else {
+    		
     	}
+
     }
 
     public String toString(){
