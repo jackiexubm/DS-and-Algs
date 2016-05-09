@@ -14,18 +14,18 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 
 	public MyHeap(T[] arr, boolean boo){
-		data = (T[]) new Comparable[arr.length];
+		data = (T[]) new Comparable[arr.length + 1];
 		for (int i = 0; i < arr.length; i++) {
-			data[i] = arr[i];
+			data[i + 1] = arr[i];
 		}
-		size = arr.length;
+		size = arr.length + 1;
 		isMax = boo;
 	}
 
 	public MyHeap(T[] arr){
-		data = (T[]) new Comparable[arr.length];
+		data = (T[]) new Comparable[arr.length + 1];
 		for (int i = 0; i < arr.length; i++) {
-			data[i] = arr[i];
+			data[i + 1] = arr[i];
 		}
 		size = arr.length;
 		isMax = true;
@@ -89,7 +89,7 @@ public class MyHeap<T extends Comparable<T>>{
 
 	public String toString(){
 		String s = "[";
-		for (int i = 0 ; i < size - 1; i++) {
+		for (int i = 1 ; i < size - 1; i++) {
 			s += data[i].toString() + ",";
 		}
 		return  s + data[size - 1] + "]";
