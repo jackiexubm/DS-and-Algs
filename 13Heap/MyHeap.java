@@ -49,14 +49,7 @@ public class MyHeap<T extends Comparable<T>>{
 
 	}
 
-   	// pushUp
-   	//    precondition: data is a heap with at most one item
-   	//    out of place (element at k)
-   	//    postconditions:-the element at index k has been 
-   	//                   shifted to the correct spot.
-   	//                   -data is a valid heap
-
-	private void pushUp(int k){
+	public void pushUp(int k){
 		if (isMax == true) {
 			if (k == 1) {
 				return;
