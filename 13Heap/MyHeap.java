@@ -61,8 +61,21 @@ public class MyHeap<T extends Comparable<T>>{
 			if (k == 1) {
 				return;
 			}
-			if (data[getParent(k)].compareTo(data[k]) < 1) {
-				//swap
+			if (data[getParent(k)].compareTo(data[k]) < 0) {
+				T temp = data[k];
+				data[k] = data[getParent(k)];
+				data[getParent(k)] = temp;
+				pushUp(getParent(k));
+			}
+		}else {
+			if (k == 1) {
+				return;
+			}
+			if (data[getParent(k)].compareTo(data[k]) > 0) {
+				T temp = data[k];
+				data[k] = data[getParent(k)];
+				data[getParent(k)] = temp;
+				pushUp(getParent(k));
 			}
 		}
 	}
