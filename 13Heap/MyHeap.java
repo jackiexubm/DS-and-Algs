@@ -2,6 +2,7 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class MyHeap<T extends Comparable<T>>{
 	private T[] data;
+	private int size;
 	private boolean isMax;
 
 	//constructors
@@ -9,6 +10,7 @@ public class MyHeap<T extends Comparable<T>>{
 	public MyHeap(boolean boo){
 		data = (T[]) new Comparable[10];
 		isMax = boo;
+		size = 0;
 	}
 
 	public MyHeap(T[] arr, boolean boo){
@@ -16,6 +18,7 @@ public class MyHeap<T extends Comparable<T>>{
 		for (int i = 0; i < arr.length; i++) {
 			data[i] = arr[i];
 		}
+		size = arr.length;
 		isMax = boo;
 	}
 
@@ -24,12 +27,14 @@ public class MyHeap<T extends Comparable<T>>{
 		for (int i = 0; i < arr.length; i++) {
 			data[i] = arr[i];
 		}
+		size = arr.length;
 		isMax = true;
 	}
 
 	public MyHeap(){
 		data = (T[]) new Comparable[10];
 		isMax = true;
+		size = 0;
 	}
 
 	//methods
@@ -52,7 +57,14 @@ public class MyHeap<T extends Comparable<T>>{
    	//                   -data is a valid heap
 
 	private void pushUp(int k){
-
+		if (isMax == true) {
+			if (k == 1) {
+				return;
+			}
+			if (data[getParent(k)].compareTo(data[k]) < 1) {
+				//swap
+			}
+		}
 	}
 
 	// public T delete(){
@@ -63,11 +75,11 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 
 	public String toString(){
-		String s = "";
-		for (int i = 0 ; i < data.length ; i++) {
-			s += data[i].toString() + " ";
+		String s = "[";
+		for (int i = 0 ; i < size - 1; i++) {
+			s += data[i].toString() + ",";
 		}
-		return s;
+		return  s + data[size - 1] + "]";
 	}
 
 	private void heapify(){
@@ -82,15 +94,15 @@ public class MyHeap<T extends Comparable<T>>{
 		data = temp;
 	}
 
-	private int getLeft(int index){
+	private static int getLeft(int index){
 		return 2 * index + 1;
 	}
 
-	private int getRight(int index){
+	private static int getRight(int index){
 		return 2 * index + 2;
 	}
 
-	private int getParent(int index){
+	private static int getParent(int index){
 		return (index - 1) / 2;
 	}
 
