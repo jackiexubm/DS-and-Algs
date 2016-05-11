@@ -119,8 +119,14 @@ public class MyHeap<T extends Comparable<T>>{
 		}
 	}
 
-	// public T delete(){
-	// }
+	public void delete(){
+		data = (T[]) new Comparable[10];
+		size = 0;
+	}
+
+	public T peek(){
+		return data[1];
+	}
 
 	public void add(T x){
 		if (size >= data.length - 1) {
