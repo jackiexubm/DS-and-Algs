@@ -18,8 +18,9 @@ public class MyHeap<T extends Comparable<T>>{
 		for (int i = 0; i < arr.length; i++) {
 			data[i + 1] = arr[i];
 		}
-		size = arr.length + 1;
+		size = arr.length;
 		isMax = boo;
+		heapify();
 	}
 
 	public MyHeap(T[] arr){
@@ -29,6 +30,7 @@ public class MyHeap<T extends Comparable<T>>{
 		}
 		size = arr.length;
 		isMax = true;
+		heapify();
 	}
 
 	public MyHeap(){
@@ -39,14 +41,8 @@ public class MyHeap<T extends Comparable<T>>{
 
 	//methods
 
-	// pushDown
- 	//      precondition: datas[k]'s children are valid heaps
-	//      postconditions:-the element at index k has been 
- 	//                     shifted to the correct spot.
- 	//                     -data[k] and is a valid heap
-
-	public void pushDown(int k){
-		if (Math.log(k) / Math.log(2) == Math.log(size) / Math.log(2)) {     // log base 2 of k
+	private void pushDown(int k){
+		if (Math.log(k) / Math.log(2) == Math.log(size) / Math.log(2)) {     // log base 2 of k. this gets k's height
 			return;
 		}
 		if (isMax == true) {
@@ -73,7 +69,7 @@ public class MyHeap<T extends Comparable<T>>{
 				}
 			}
 		}else {
-			if (getLeft(k) < size && getRight(k) < size) {   // has left and right children
+			if (getLeft(k) < size && getRight(k) < size) {   
 				if ( data[getLeft(k)].compareTo(data[k]) < 0 || data[getRight(k)].compareTo(data[k]) < 0 ) {
 					if (data[getLeft(k)].compareTo(data[getRight(k)]) < 0) {
 						T temp = data[k];
@@ -98,11 +94,12 @@ public class MyHeap<T extends Comparable<T>>{
 		}
 	}
 
-	public void pushUp(int k){
+	private void pushUp(int k){
 		if (isMax == true) {
-			if (k == 1) {
+			if (k == 1){
 				return;
 			}
+			System.out.println("ran");
 			if (data[getParent(k)].compareTo(data[k]) < 0) {
 				T temp = data[k];
 				data[k] = data[getParent(k)];
@@ -126,22 +123,36 @@ public class MyHeap<T extends Comparable<T>>{
 	// }
 
 	public void add(T x){
+		if (size >= data.length - 1) {
+			doubleSize();
+		}
+		size++;
+		data[size] = x;
+		pushUp(size);
+	}
 
+	public void printData(){
+		for (int i = 0; i < data.length; i++) {
+			System.out.print(data[i]);
+		}
 	}
 
 	public String toString(){
 		String s = "[";
-		for (int i = 1 ; i < size - 1; i++) {
+		if (size == 0) {
+			return "[]";
+		}
+		for (int i = 1 ; i < size; i++) {
 			s += data[i].toString() + ",";
 		}
-		return  s + data[size - 1] + "]";
+		return  s + data[size] + "]";
 	}
 
-	// private void heapify(){
-	// 	for (int i = size/2;i > 0; i-- ) {
-	// 		pushDown(i);
-	// 	}
-	// }
+	private void heapify(){
+		for (int i = size/2;i > 0; i-- ) {
+			pushDown(i);
+		}
+	}
 
 	private void doubleSize(){
 		T[] temp = (T[]) new Comparable[data.length * 2];
@@ -160,7 +171,10 @@ public class MyHeap<T extends Comparable<T>>{
 	}
 
 	private static int getParent(int index){
-		return (index - 1) / 2;
+		if (index == 2) {
+			return 1;
+		}
+		return (index) / 2;
 	}
 
 }
